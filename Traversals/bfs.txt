@@ -1,0 +1,23 @@
+from Traversals.helpers import *
+from Traversals.queue_ll import Queue
+
+
+def bfs(maze,start,goal):
+    queue = Queue()
+    queue.enqueue(start)
+    predecessor = {start:None}
+    while not queue.is_empty():
+        curr = queue.dequeue()
+        if curr == goal:
+            return get_path(predecessor,start,goal)
+        for dir in ['up','right','down','left']:
+            row,col = offsets[direction]
+            neighbor = (curr[0]+row , curr[1]+col)
+            if is_valid_pos(neighbor) and not neighbor in predecessor:
+                queue.enqueue(neighbor)
+                predecesor[neighbor] = curr
+    return None
+
+if __name__ == "__main__":
+    maze = [[0]*3 for i in range(3)]
+    print(bfs(maze,(0,0),(2,2))

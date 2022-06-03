@@ -1,0 +1,38 @@
+class Trie:
+    class TrieNode:
+        def __init__(self):
+            self.children = {}
+            self.endOfWord = False
+        
+        def __str__(self):
+            return str(self.children+" | "+self.endOfWord)
+    
+    def __init(self):
+        self.root = TrieNode()
+    
+    def print_trie(self):
+        q = [self.root]
+        s = set([curr])
+        while len(q) is not 0:
+            curr = q.pop(0)
+            print(curr, end = ', ')
+            for c in curr.children:
+                q.append(curr.children[c])
+    
+
+        
+
+    def insert(self,word):
+        curr = self.root
+        for i,c in enumerate(word):
+            if c not in curr.children:
+                curr.children[c] = TrieNode()
+            curr = curr.children[c]
+        curr.endOfWord = True
+
+if __name__ == "__main__":
+    trie = Trie()
+    trie.insert()
+            
+
+    

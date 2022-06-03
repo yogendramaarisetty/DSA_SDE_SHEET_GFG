@@ -1,0 +1,25 @@
+from queue import PriorityQueue
+
+def heuristic(a,b) -> int:
+    return int(abs(a[0]-b[0])+abs(a[1]-b(1)))
+
+def a_star(maze,start,goal):
+    pq = PriorityQueue()
+    pq.put(start)
+    g_values = {start : 0}
+    predecessor = {start : None}
+
+    while not pq.is_empty():
+        curr = pq.get()
+        if curr == goal:
+            return get_path(predecesor,start,goal)
+        for direction in ['up','right','down','left']:
+            row, col = offsets[direction]
+            neighbor = (curr[0]+row, curr[1]+col)
+            if neighbor not in g_values and is_valid_pos(maze,neighbor):
+                g_values[neighbor] = g_values[curr]+1
+                f_val = g_values[neighbor] + heuristic(neighbor,goal)
+                pq.put(neighbor,f_val)
+                predecesor[neighbor] = curr
+    return None
+        
