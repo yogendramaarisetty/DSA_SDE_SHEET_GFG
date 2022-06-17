@@ -1,0 +1,28 @@
+from graph import Graph
+from helper import *
+from queue import Queue
+
+def dijkstras(graph,src,dst):
+    distance = [(2*32)-1 for _ in range(graph.num_nodes)]
+    distance[src] = 0
+    visited = [False for _ in range(graph.num_nodes)]
+    q = Queue(graph.num_nodes)
+    pred = {src:None}
+    q.put(src)
+    while not q.empty():
+        curr = q.get()
+        visited[curr] = True
+        for neighbor,weight in graph.data[curr]:
+            if not visited[neighbor]:
+                if weight + distance[curr] < distance[neighbor]:
+                    distance[neighbor] = weight + distance[curr]  
+                q.put(neighbor)
+            pred[neighbor] = curr
+    print(visited,distance,pred)
+        
+
+if __name__ == '__main__':
+    #weighted_edges = [(0,1,3),(0,3,2),(0,8,4),(1,7,4),(2,7,2),(2,3,6),(2,5,1),(3,4,1),(4,8,8),(5,6,8)]
+    weighted_edges = [(1,2,2),(1,3,4),(2,4,7),(2,3,1),(3,5,3),(4,6,1),(5,4,2),(5,6,5)]
+    g2 = Graph(7,weighted_edges,weighted=True,directed=True)
+    dijkstras(g2,1,6)
